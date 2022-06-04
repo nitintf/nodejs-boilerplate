@@ -1,18 +1,46 @@
-version: '3'
+version: '3.6'
 
 services:
   db:
-    image: postgres
+    image: postgres:9.6
+    container_name: postgres-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    command:
-      postgres -c max_connections=200 -c fsync=off -c synchronous_commit=off -c
-      full_page_writes=off
+    command: postgres -c max_connections=200 -c fsync=off -c synchronous_commit=off -c full_page_writes=off
     volumes:
-      - database-volume:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     ports:
-      - '65342:65342'
+      - '5432:5432'
     networks:
       - shared-network
     restart: on-failure
+  # pubsub:
+  #   image: messagebird/gcloud-pubsub-emulator:latest
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_STAGE: dev
+    volumes:
+      - .:/usr/src/app
+    command:
+      - npm
+      - run
+      - start:main
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - 31348:8080
+      - 9229:9229
+    networks:
+      - shared-network
+
+volumes:
+  postgres:
+
+networks:
+  shared-network:
