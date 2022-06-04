@@ -1,0 +1,7 @@
+require:
+  - source-map-support/register
+  - mocha-multi-reporters
+  - tsconfig-paths/register
+reporter: mocha-multi-reporters
+reporter-options:
+  - configFile=./mocha.json

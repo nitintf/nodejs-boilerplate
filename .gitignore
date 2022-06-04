@@ -1,0 +1,26 @@
+.env
+**/.DS_Store
+.idea
+
+# VS Code files
+.vscode
+*.code-workspace
+jsconfig.json
+
+/node_modules
+npm-debug.log
+newrelic_agent.log
+tmp/
+test
+junit
+coverage
+.nyc_output
+
+# TS output files.
+/dist/**
+!/dist/node_modules
+!/dist/node_modules/**
+
+# TS incremental compilation.
+/tsconfig.tsbuildinfo
+report*.json
