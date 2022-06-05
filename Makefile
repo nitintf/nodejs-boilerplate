@@ -5,13 +5,13 @@ _app-start-db:
 
 
 app-dbmate-up: _app-start-db ## dbmate up.
-	@$(NODEJS_APPL_RUN) npm run dbmate -- up
+	@$(NODEJS_APP_RUN) npm run dbmate -- up
 
 app-dbmate-down: _app-start-db ## dbmate down.
-	@$(NODEJS_APPL_RUN) npm run dbmate -- down
+	@$(NODEJS_APP_RUN) npm run dbmate -- down
 
 app-dbmate-new: ## Create a new app db migration.
-	@$(NODEJS_APPL_RUN) npm run dbmate -- new $(migration)
+	@$(NODEJS_APP_RUN) npm run dbmate -- new $(migration)
 
 app-dbmate-dump: ## Dump the app schema.
-	@$(NODEJS_APPL_RUN) npm run dbmate -- dump
+	@$(NODEJS_APP_RUN) npm run dbmate -- dump
