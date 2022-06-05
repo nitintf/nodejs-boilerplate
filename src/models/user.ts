@@ -1,21 +1,27 @@
 import * as Sequelize from 'sequelize';
-
-export interface User {
-  id: string;
+export interface UserAttributes {
+  id?: string;
   email: string;
   firstName: string;
   lastName: string;
   password: string;
 }
 
+export type UserInstanceAttributes = Required<UserAttributes> & {};
+
+export interface UserInstance extends Sequelize.Instance<UserInstanceAttributes>, UserAttributes {}
+
+export interface User extends Sequelize.Model<UserInstance, UserAttributes> {}
+
 export default function (sequelize: Sequelize.Sequelize) {
-  const User = sequelize.define(
+  const User = sequelize.define<UserInstance, UserAttributes>(
     'User',
     {
       id: {
         type: Sequelize.TEXT,
         primaryKey: true,
         allowNull: false,
+        defaultValue: Sequelize.UUIDV4,
       },
       email: {
         type: Sequelize.TEXT,

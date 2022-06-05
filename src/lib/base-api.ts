@@ -12,6 +12,7 @@ import {
   NotFoundError,
   ValidationError,
 } from 'nodejs-boilerplate/lib/errors';
+import { ServiceContext, UserContext } from 'nodejs-boilerplate/types';
 
 export function formatErrorResponse(error: any) {
   return { error: error.details || error.message };
@@ -20,11 +21,11 @@ export function formatErrorResponse(error: any) {
 export default class BaseMidasApi {
   protected context: any;
 
-  constructor(context: any) {
+  constructor(context: ServiceContext) {
     this.context = context;
   }
 
-  public createContext(res?: Response) {
+  public createContext(res?: Response): UserContext {
     return Object.assign({}, this.context, {
       userId: res?.locals?.userId,
       userEmail: res?.locals?.userEmail,

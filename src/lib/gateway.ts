@@ -14,7 +14,7 @@ import {
 } from 'nodejs-boilerplate/lib/errors';
 
 interface RouteAuthn {
-  jwtAuth: any;
+  serviceAuthenticator: any;
   // serviceAccount?: ServiceAccountAuthenticator;
   // oauth?: OAuthAuthenticator;
 }
@@ -128,7 +128,7 @@ export default class Gateway {
 
       if (scheme === 'Bearer') {
         // authenticate with authn
-        authn.jwtAuth(req, res, scope);
+        authn.serviceAuthenticator(req, res, scope);
       } else {
         throw new AuthenticationError('Invalid authentication type used.');
       }

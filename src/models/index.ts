@@ -1,8 +1,13 @@
-import sequelize, { Sequelize, Transaction, DatabaseError } from 'sequelize';
+import sequelize, {
+  Sequelize,
+  Transaction,
+  DatabaseError,
+  TransactionIsolationLevel,
+} from 'sequelize';
 import { LoggerInstance } from 'winston';
 import sequelizeTransforms from 'sequelize-transforms';
 import { snakeCase } from 'change-case';
-import userModelFactory from './user';
+import userModelFactory, { User } from './user';
 import * as environment from 'nodejs-boilerplate/lib/enviorment';
 import { exponentialBackoffWithJitter } from 'nodejs-boilerplate/lib/utils';
 
@@ -28,7 +33,7 @@ export default class Models {
   public sequelize: Sequelize;
   public tableNames: string[];
 
-  public User: any;
+  public User: User;
 
   private logger: LoggerInstance;
   private url: string;
@@ -128,7 +133,7 @@ export default class Models {
       retryCount,
       retry,
       maxRetry,
-      Transaction.ISOLATION_LEVELS.SERIALIZABLE,
+      Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE,
     );
   }
 
@@ -140,7 +145,7 @@ export default class Models {
     retryCount = 0,
     retry = true,
     maxRetry = TRANSACTION_RETRY_LIMIT,
-    isolationLevel: Transaction.ISOLATION_LEVELS,
+    isolationLevel: TransactionIsolationLevel,
   ): Promise<T> {
     try {
       const isolationLevelRequiresRetries =
