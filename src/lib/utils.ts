@@ -22,3 +22,6 @@ export function sleep(delay: number) {
 export async function exponentialBackoffWithJitter(attempt: number, capMs = 5000, baseMs = 1000) {
   await sleep(Math.min(capMs, baseMs * 2 ** attempt) * Math.random());
 }
+
+export const base64Encode = (value: string) => Buffer.from(value).toString('base64');
+export const base64Decode = (value: string) => Buffer.from(value, 'base64').toString();
