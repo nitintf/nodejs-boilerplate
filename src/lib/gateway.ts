@@ -4,14 +4,14 @@ import cors from 'cors';
 import path from 'path';
 import compression from 'compression';
 import { v4 as uuidV4 } from 'uuid';
-import { getAuthParamsFromRequest, makeShaHash } from 'nodejs-boilerplate/lib/utils';
-import { HTTP_INTERNAL_SERVER_ERROR } from 'nodejs-boilerplate/lib/constants/http';
+import { getAuthParamsFromRequest, makeShaHash } from 'app/lib/utils';
+import { HTTP_INTERNAL_SERVER_ERROR } from 'app/lib/constants/http';
 import {
   AccessError,
   AuthenticationError,
   extractErrorCode,
   extractErrorMessage,
-} from 'nodejs-boilerplate/lib/errors';
+} from 'app/lib/errors';
 
 interface RouteAuthn {
   serviceAuthenticator: any;

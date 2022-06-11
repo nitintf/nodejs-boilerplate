@@ -1,4 +1,4 @@
-import { HTTP_REQUEST_TIMEOUT } from 'nodejs-boilerplate/lib/constants/http';
+import { HTTP_REQUEST_TIMEOUT } from 'app/lib/constants/http';
 import { CustomError } from './custom-error';
 
 export class RequestTimeoutError extends CustomError {

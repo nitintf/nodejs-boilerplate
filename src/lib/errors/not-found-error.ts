@@ -1,4 +1,4 @@
-import { HTTP_NOT_FOUND } from 'nodejs-boilerplate/lib/constants/http';
+import { HTTP_NOT_FOUND } from 'app/lib/constants/http';
 import { CustomError } from './custom-error';
 
 export class NotFoundError extends CustomError {

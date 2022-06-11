@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import BaseMidasApi from 'nodejs-boilerplate/lib/base-api';
+import BaseMidasApi from 'app/lib/base-api';
 
 export default class MidasApi extends BaseMidasApi {
   public async getUsers(req: Request, res: Response) {

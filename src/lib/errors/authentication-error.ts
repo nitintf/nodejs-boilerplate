@@ -1,4 +1,4 @@
-import { HTTP_UNAUTHORIZED } from 'nodejs-boilerplate/lib/constants/http';
+import { HTTP_UNAUTHORIZED } from 'app/lib/constants/http';
 import { CustomError } from './custom-error';
 
 export class AuthenticationError extends CustomError {

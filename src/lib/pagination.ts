@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import R from 'ramda';
-import { base64Encode, base64Decode } from 'nodejs-boilerplate/lib/utils';
+import { base64Encode, base64Decode } from 'app/lib/utils';
 import { Promise } from 'bluebird';
 import format from 'pg-format';
 

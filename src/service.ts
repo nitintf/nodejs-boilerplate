@@ -1,7 +1,7 @@
-import MidasApi from 'nodejs-boilerplate/api';
-import createServiceAuthenticator from 'nodejs-boilerplate/lib/authn/service-auth';
-import Gateway from 'nodejs-boilerplate/lib/gateway';
-import { ServiceContext } from 'nodejs-boilerplate/types';
+import MidasApi from 'app/api';
+import createServiceAuthenticator from 'app/lib/authn/service-auth';
+import Gateway from 'app/lib/gateway';
+import { ServiceContext } from 'app/types';
 
 interface ServiceOptions {
   context: ServiceContext;

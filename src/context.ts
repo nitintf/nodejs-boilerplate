@@ -1,14 +1,14 @@
-import { ServiceContext, SERVICE_NAME, SERVICE_NAMESPACE } from 'nodejs-boilerplate/types';
-import * as environment from 'nodejs-boilerplate/lib/enviorment';
-import createLogger from 'nodejs-boilerplate/lib/logger';
-import createTracer from 'nodejs-boilerplate/lib/tracer';
-import Models from 'nodejs-boilerplate/models';
-import PagerDutyClient from 'nodejs-boilerplate/lib/pager-duty';
-import BackgroundJobRunner from 'nodejs-boilerplate/lib/background-job-runner';
+import { ServiceContext, SERVICE_NAME, SERVICE_NAMESPACE } from 'app/types';
+import * as environment from 'app/lib/enviorment';
+import createLogger from 'app/lib/logger';
+import createTracer from 'app/lib/tracer';
+import Models from 'app/models';
+import PagerDutyClient from 'app/lib/pager-duty';
+import BackgroundJobRunner from 'app/lib/background-job-runner';
 import http from 'http';
 import { createTerminus, HealthCheckMap, TerminusOptions } from '@godaddy/terminus';
-import { sleep } from 'nodejs-boilerplate/lib/utils';
-import { MS_PER_SECOND } from 'nodejs-boilerplate/lib/constants/time';
+import { sleep } from 'app/lib/utils';
+import { MS_PER_SECOND } from 'app/lib/constants/time';
 
 // Graceful shutdown sequence:
 // - K8s marks the pod as termitating and begins removing it from load balancing.

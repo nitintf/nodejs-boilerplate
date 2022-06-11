@@ -1,8 +1,8 @@
-import PagerDutyClient from 'nodejs-boilerplate/lib/pager-duty';
+import PagerDutyClient from 'app/lib/pager-duty';
 import { LoggerInstance } from 'winston';
 import { Tracer } from 'dd-trace';
-import BackgroundJobRunner from 'nodejs-boilerplate/lib/background-job-runner';
-import Models from 'nodejs-boilerplate/models';
+import BackgroundJobRunner from 'app/lib/background-job-runner';
+import Models from 'app/models';
 
 export interface ServiceContext {
   models: Models;

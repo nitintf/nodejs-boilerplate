@@ -1,8 +1,8 @@
 import http from 'http';
-import { initContext, setupGracefulShutdown } from 'nodejs-boilerplate/context';
-import * as enviorment from 'nodejs-boilerplate/lib/enviorment';
-import createService from 'nodejs-boilerplate/service';
-import { MS_PER_SECOND } from 'nodejs-boilerplate/lib/constants/time';
+import { initContext, setupGracefulShutdown } from 'app/context';
+import * as enviorment from 'app/lib/enviorment';
+import createService from 'app/service';
+import { MS_PER_SECOND } from 'app/lib/constants/time';
 
 const PORT = 8080;
 

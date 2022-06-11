@@ -5,14 +5,9 @@ import {
   HTTP_FORBIDDEN,
   HTTP_INTERNAL_SERVER_ERROR,
   HTTP_NOT_FOUND,
-} from 'nodejs-boilerplate/lib/constants/http';
-import {
-  AccessError,
-  CustomError,
-  NotFoundError,
-  ValidationError,
-} from 'nodejs-boilerplate/lib/errors';
-import { ServiceContext, UserContext } from 'nodejs-boilerplate/types';
+} from 'app/lib/constants/http';
+import { AccessError, CustomError, NotFoundError, ValidationError } from 'app/lib/errors';
+import { ServiceContext, UserContext } from 'app/types';
 
 export function formatErrorResponse(error: any) {
   return { error: error.details || error.message };

@@ -2,7 +2,7 @@ import {
   HTTP_CODE_TO_MESSAGE,
   HTTP_FORBIDDEN,
   HTTP_INTERNAL_SERVER_ERROR,
-} from 'nodejs-boilerplate/lib/constants/http';
+} from 'app/lib/constants/http';
 
 export * from './custom-error';
 export * from './access-error';

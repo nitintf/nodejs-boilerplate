@@ -8,8 +8,8 @@ import { LoggerInstance } from 'winston';
 import sequelizeTransforms from 'sequelize-transforms';
 import { snakeCase } from 'change-case';
 import userModelFactory, { User } from './user';
-import * as environment from 'nodejs-boilerplate/lib/enviorment';
-import { exponentialBackoffWithJitter } from 'nodejs-boilerplate/lib/utils';
+import * as environment from 'app/lib/enviorment';
+import { exponentialBackoffWithJitter } from 'app/lib/utils';
 
 const TRANSACTION_RETRY_LIMIT = 4;
 const DB_STATEMENT_TIMEOUT = environment.getNumber(process.env, 'DB_STATEMENT_TIMEOUT', 0);
