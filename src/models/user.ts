@@ -11,7 +11,7 @@ export type UserInstanceAttributes = Required<UserAttributes> & {};
 
 export interface UserInstance extends Sequelize.Instance<UserInstanceAttributes>, UserAttributes {}
 
-export interface User extends Sequelize.Model<UserInstance, UserAttributes> {}
+export type User = Sequelize.Model<UserInstance, UserAttributes>;
 
 export default function (sequelize: Sequelize.Sequelize) {
   const User = sequelize.define<UserInstance, UserAttributes>(

@@ -5,8 +5,10 @@ type ServiceAccountAuthenticator = (
   res: Response,
   token: string,
   scope?: string,
-) => Promise<void>;
+) => Promise<boolean>;
 
 export default function createServiceAuthenticator(): ServiceAccountAuthenticator {
-  return async () => {};
+  return async () => {
+    return false;
+  };
 }

@@ -14,7 +14,7 @@ export function formatErrorResponse(error: any) {
 }
 
 export default class BaseMidasApi {
-  protected context: any;
+  protected context: ServiceContext;
 
   constructor(context: ServiceContext) {
     this.context = context;
