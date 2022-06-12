@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["**/*.mocha.ts", "**/*.spec.ts"],
+  "exclude": ["node_modules", "dist"]
+}
