@@ -15,3 +15,21 @@ app-dbmate-new: ## Create a new app db migration.
 
 app-dbmate-dump: ## Dump the app schema.
 	@$(NODEJS_APP_RUN) npm run dbmate -- dump
+
+app-npm-install: ## Install app npm packages.
+	@$(NODEJS_APP_RUN) npm install
+
+app-package-lock: ## Generate the app package-lock.json
+	@$(NODEJS_APP_RUN) npm install --package-lock-only
+
+app-unit: ## Run the app unit tests.
+	@$(NODEJS_APP_RUN) npm run unit
+
+app-clean: ## Run clean script
+	@$(NODEJS_APP_RUN) npm run clean
+
+app-integration: _app-start-db ## Run the app intgegration tests.
+	@$(NODEJS_APP_RUN) npm run integration
+
+app-integration-watch: _app-start-db ## Run the app intgegration tests in watch mode.
+	@$(NODEJS_APP_RUN) npm run integration:watch
