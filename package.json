@@ -28,7 +28,8 @@
     "integration:base": "export DATABASE_URL=postgresql://postgres:postgres@db:5432/test?sslmode=disable && npm run clean && npm run build && npm run dbmate:wait && npm run dbmate:drop && npm run dbmate:up && ts-mocha --config ./.mocharc.yml --exit",
     "integration": "nyc npm run integration:base -- ./src/**/*.mocha.*",
     "integration:buildkite": "nyc npm run integration:base",
-    "integration:watch": "npm run integration:base -- -w --watch-extensions ./src/**/*.mocha.*"
+    "integration:watch": "npm run integration:base -- -w --watch-extensions ./src/**/*.mocha.*",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Nitin",
@@ -83,6 +84,7 @@
     "codecov": "^3.8.3",
     "del-cli": "^4.0.1",
     "dotenv": "^16.0.1",
+    "husky": "^8.0.1",
     "jest": "^28.1.0",
     "jest-junit": "^13.2.0",
     "lint-staged": "^13.0.0",
