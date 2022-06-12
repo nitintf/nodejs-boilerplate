@@ -7,6 +7,7 @@ import sequelize, {
 import { LoggerInstance } from 'winston';
 import sequelizeTransforms from 'sequelize-transforms';
 import { snakeCase } from 'change-case';
+import format from 'pg-format';
 import userModelFactory, { User } from './user';
 import * as environment from 'app/lib/enviorment';
 import { exponentialBackoffWithJitter } from 'app/lib/utils';
@@ -222,6 +223,28 @@ export default class Models {
       }
 
       throw error;
+    }
+  }
+
+  public async truncate(retryLimit = 0, retryCount = 0) {
+    try {
+      await this.sequelize.query(
+        format(
+          `
+            TRUNCATE %s CASCADE;
+          `,
+          this.tableNames.join(','),
+        ),
+        { type: this.sequelize.QueryTypes.BULKDELETE },
+      );
+    } catch (error: any) {
+      if (retryCount >= retryLimit) {
+        throw error;
+      }
+
+      this.logger.error(error);
+
+      await this.truncate(retryLimit, retryCount + 1);
     }
   }
 }

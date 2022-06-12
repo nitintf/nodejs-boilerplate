@@ -4,6 +4,11 @@ import { Tracer } from 'dd-trace';
 import BackgroundJobRunner from 'app/lib/background-job-runner';
 import Models from 'app/models';
 
+export type Nullable<T> = T | null;
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+export type $Values<O extends object> = O[keyof O];
+
 export interface ServiceContext {
   models: Models;
   // cloudPubSubClient: any; // CloudPubSubClient;
@@ -33,3 +38,8 @@ export const ENVIRONMENT = {
 
 export const SERVICE_NAME = 'test';
 export const SERVICE_NAMESPACE = 'product';
+
+export const AUTH_USER_TYPE = {
+  USER: 'user',
+  ADMIN: 'admin',
+};
