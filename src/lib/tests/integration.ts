@@ -1,4 +1,3 @@
-// tslint:disable:no-console
 import Models from 'app/models';
 import assert from 'assert';
 import { v4 as uuid4 } from 'uuid';
@@ -77,7 +76,6 @@ declare module 'mocha' {
   }
 }
 
-/* tslint:disable:ban-types */
 function wrapper<T extends FixtureReturnType<any>>(
   fixturesOrFn: Nullable<IntegrationTestFixtures<T>> | Function,
   fn?: Function,
