@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import Models from 'app/models';
 import assert from 'assert';
 import { v4 as uuid4 } from 'uuid';
