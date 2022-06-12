@@ -9,7 +9,6 @@ jsconfig.json
 
 /node_modules
 npm-debug.log
-newrelic_agent.log
 tmp/
 test
 junit

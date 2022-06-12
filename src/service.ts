@@ -23,11 +23,9 @@ export default function createService({ context, inGcp }: ServiceOptions) {
       handler: api.getUsers.bind(api),
       method: 'GET',
       path: '/user',
-    },
-    {
-      handler: api.getUsers.bind(api),
-      method: 'POST',
-      path: '/user',
+      authn: {
+        serviceAuthenticator: serviceAuthn,
+      },
     },
   ]);
 }
