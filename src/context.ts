@@ -3,7 +3,6 @@ import * as environment from 'app/lib/enviorment';
 import createLogger from 'app/lib/logger';
 import createTracer from 'app/lib/tracer';
 import Models from 'app/models';
-import PagerDutyClient from 'app/lib/pager-duty';
 import BackgroundJobRunner from 'app/lib/background-job-runner';
 import http from 'http';
 import { createTerminus, HealthCheckMap, TerminusOptions } from '@godaddy/terminus';
@@ -85,9 +84,6 @@ export const initContext = async (): Promise<ServiceContext> => {
 
   await models.waitForConnection();
 
-  // init PagerDutyClient - TODO: only in prod
-  const pagerDutyClient = new PagerDutyClient();
-
   // // Configure GCP PubSub client.
   // const gcpProjectId = environment.getString(process.env, 'GCP_PROJECT_ID');
   // const gcpSaCredentials = JSON.parse(
@@ -116,7 +112,6 @@ export const initContext = async (): Promise<ServiceContext> => {
     logger,
     backgroundJobRunner,
     models,
-    pagerDutyClient,
     tracer,
   };
 };

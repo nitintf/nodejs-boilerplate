@@ -4,7 +4,6 @@ import { v4 as uuid4 } from 'uuid';
 import sinon, { SinonStubbedInstance, SinonStubbedMember, StubbableType } from 'sinon';
 import { AUTH_USER_TYPE, Nullable, UserContext } from 'app/types';
 import { Logger, LoggerInstance } from 'winston';
-import PagerDutyClient from 'app/lib/pager-duty';
 import { Tracer } from 'dd-trace';
 import BackgroundJobRunner from 'app/lib/background-job-runner';
 import Mocha from 'mocha';
@@ -54,10 +53,9 @@ interface StubbedContext extends UserContext {
   userType: string;
   requestId: string;
   models: Models;
-  logger: LoggerInstance;
-  pagerDutyClient: PagerDutyClient;
-  tracer: Tracer;
-  backgroundJobRunner: BackgroundJobRunner;
+  logger: StubbedClass<LoggerInstance>;
+  tracer: StubbedClass<Tracer>;
+  backgroundJobRunner: StubbedClass<BackgroundJobRunner>;
 }
 
 function createStubbedLogger(): StubbedClass<LoggerInstance> {
@@ -91,7 +89,6 @@ function wrapper<T extends FixtureReturnType<any>>(
   return function (this: Mocha.Suite) {
     this.timeout(50000);
     this.retries(0);
-
     let suiteStart: number;
     let beforeEachCurrentStart: number;
     let beforeEachTotalMs = 0;
@@ -139,7 +136,6 @@ function wrapper<T extends FixtureReturnType<any>>(
         // logger: createLogger('app-name', 'debug') as StubbedClass<LoggerInstance>,
         logger,
         tracer: createSinonStubInstance(Logger),
-        pagerDutyClient: createSinonStubInstance<PagerDutyClient>(PagerDutyClient),
         backgroundJobRunner: createSinonStubInstance<BackgroundJobRunner>(BackgroundJobRunner),
       };
     });

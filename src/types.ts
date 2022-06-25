@@ -1,4 +1,3 @@
-import PagerDutyClient from 'app/lib/pager-duty';
 import { LoggerInstance } from 'winston';
 import { Tracer } from 'dd-trace';
 import BackgroundJobRunner from 'app/lib/background-job-runner';
@@ -15,7 +14,6 @@ export interface ServiceContext {
   // cloudStorageClient: any; // Storage;
   // cloudStorageBucketName: string;
   logger: LoggerInstance;
-  pagerDutyClient: PagerDutyClient;
   tracer: Tracer;
   backgroundJobRunner: BackgroundJobRunner;
   userId?: string;
