@@ -13,7 +13,7 @@ export function formatErrorResponse(error: any) {
   return { error: error.details || error.message };
 }
 
-export default class BaseMidasApi {
+export default class BaseApi {
   protected context: ServiceContext;
 
   constructor(context: ServiceContext) {

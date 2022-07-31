@@ -55,6 +55,7 @@ export default function createLogger(serviceName: string, level = 'info'): Logge
         json: true,
         stringify: ({ message, level, ...meta }: any) => {
           const sanitizedMeta = sanitizeMetadata(meta);
+
           const isSanitized = sanitizedMeta && sanitizedMeta.truncated;
           let severity = level;
 
@@ -71,7 +72,7 @@ export default function createLogger(serviceName: string, level = 'info'): Logge
             severity,
             message,
             traceId: span?.context().toTraceId(),
-            context: sanitizeMetadata,
+            context: meta,
           };
 
           return JSON.stringify(logLine, decycle());

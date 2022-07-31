@@ -2,6 +2,7 @@ import sequelize, {
   Sequelize,
   Transaction,
   DatabaseError,
+  QueryTypes,
   TransactionIsolationLevel,
 } from 'sequelize';
 import { LoggerInstance } from 'winston';
@@ -9,6 +10,7 @@ import sequelizeTransforms from 'sequelize-transforms';
 import { snakeCase } from 'change-case';
 import format from 'pg-format';
 import userModelFactory, { User } from './user';
+import listModelFactory, { List } from './list';
 import * as environment from 'app/lib/enviorment';
 import { exponentialBackoffWithJitter } from 'app/lib/utils';
 
@@ -35,6 +37,7 @@ export default class Models {
   public tableNames: string[];
 
   public User: User;
+  public List: List;
 
   private logger: LoggerInstance;
   private url: string;
@@ -82,13 +85,31 @@ export default class Models {
     this.User = userModelFactory(sequelize);
     tableNames.push(getTableName(this.User));
 
+    this.List = listModelFactory(sequelize);
+    tableNames.push(getTableName(this.List));
+
     this.sequelize = sequelize;
     this.tableNames = tableNames;
 
-    // add associationa nd hooks logic
+    // TODO: add associationa nd hooks logic
+
+    const models = sequelize.models;
+
+    for (const model of Object.values(models)) {
+      if (model.associate) {
+        model.associate(models);
+      }
+
+      // @ts-ignore
+      if (model.hooks) {
+        // @ts-ignore
+        model.hooks(this);
+      }
+    }
   }
 
   public async checkConnection() {
+    // https://sequelize.org/master/manual/getting-started.html#testing-the-connection
     await this.sequelize.authenticate();
     this.logger.info('Sequelize connection ok');
   }
@@ -134,7 +155,7 @@ export default class Models {
       retryCount,
       retry,
       maxRetry,
-      Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE,
+      Transaction.ISOLATION_LEVELS.SERIALIZABLE,
     );
   }
 
@@ -235,7 +256,7 @@ export default class Models {
           `,
           this.tableNames.join(','),
         ),
-        { type: this.sequelize.QueryTypes.BULKDELETE },
+        { type: QueryTypes.BULKDELETE },
       );
     } catch (error: any) {
       if (retryCount >= retryLimit) {

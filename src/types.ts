@@ -26,6 +26,10 @@ export interface UserContext extends ServiceContext {
   requestId?: string;
 }
 
+export function isUserContext(object: any): object is UserContext {
+  return object.userId && object.userEmail && object.userType;
+}
+
 export const ENVIRONMENT = {
   LOCAL: 'local',
   TEST: 'test',
@@ -40,4 +44,15 @@ export const SERVICE_NAMESPACE = 'product';
 export const AUTH_USER_TYPE = {
   USER: 'user',
   ADMIN: 'admin',
+};
+
+export interface SequelizeTimestamps {
+  readonly createdAt?: Date;
+  readonly createdBy?: string;
+  readonly updatedAt?: Nullable<Date>;
+  updatedBy?: Nullable<string>;
+}
+
+export type ParanoidTimestamps = SequelizeTimestamps & {
+  readonly deletedAt?: Nullable<Date>;
 };
